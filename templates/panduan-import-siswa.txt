@@ -1,0 +1,32 @@
+# CARA IMPORT SISWA KE MOODLE (SMKN 5 TELKOM BANDA ACEH)
+# =====================================================
+# 1. Buat dulu "Kohort" (kelas) di:
+#    Situs administration > Pengguna > Akun > Kohort > Tambah kohort
+#    Contoh nama: "TKJ X-1", "RPL XI-2", dll.
+
+# 2. Siapkan file CSV dengan format kolom seperti template:
+#    username,password,firstname,lastname,email,cohort1,lang
+#    - username & email WAJIB unik dan tidak boleh sama dengan yang sudah ada
+#    - password default untuk siswa (misal smkn5telkom) - bisa diganti nanti
+#    - cohort1 = nama kohort yang sudah dibuat (untuk enroll otomatis ke kelas)
+#    - lang = id (bahasa Indonesia)
+
+# 3. Upload lewat UI:
+#    Situs administration > Pengguna > Unggah pengguna
+#    - Pilih file CSV > Preview
+#    - Default password: isi agar siswa login pakai password tersebut
+#    - Ceklis "Buat pengguna yang belum ada"
+#    - Upload pengguna
+
+# 4. Setelah upload, siswa muncul di daftar pengguna
+#    dan otomatis masuk ke kohort (kelas) masing-masing.
+
+# 5. Untuk enroll massal ke kursus:
+#    Kursus > Peserta > Metode enrol > Kohort sync
+#    - Pilih kohort yang sesuai, maka semua anggota kohort
+#      otomatis masuk sebagai peserta kursus.
+
+# TIPS:
+# - Gunakan data Dapodik untuk menyusun CSV (NISN bisa jadi username)
+# - Jangan tulis password asli di CSV jika file bisa dilihat orang lain
+# - Tes import dengan 1-2 siswa dulu sebelum massal

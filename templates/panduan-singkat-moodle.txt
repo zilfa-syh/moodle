@@ -1,0 +1,84 @@
+PANDUAN SINGKAT MOODLE SMKN 5 TELKOM BANDA ACEH
+================================================
+URL: https://moodle.xorbit.my.id
+
+---------------------------------------------------------------------------
+A. AKUN & PERAN
+---------------------------------------------------------------------------
+- Admin  : full akses, kelola situs (admin / ganti password sendiri)
+- Guru   : buat & isi kursus, nilai siswa (contoh: pakbudi)
+- Murid  : akses kursus, kerjakan tugas & kuis (contoh: andi.10tkj1)
+
+Semua akun contoh memakai password Smkn5Telkom2026! (wajib diganti).
+Akun asli diimpor oleh admin dari data sekolah (panduan: templates/panduan-import-siswa.txt).
+
+---------------------------------------------------------------------------
+B. ALUR KERJA GURU (per hari)
+---------------------------------------------------------------------------
+1. Buka https://moodle.xorbit.my.id -> login
+2. Dashboard -> pilih kursus (mis. "Matematika X TKJ")
+3. "Turn editing on" (Aktifkan pengeditan)
+4. Tambah aktivitas/materi:
+   - "+ Tambah aktivitas atau sumber" -> Pilih
+     * Materi      : Page / File / Buku / Video
+     * Diskusi     : Forum
+     * Tugas       : Assignment (murid upload jawaban)
+     * Ujian       : Quiz (pilih soal dari bank soal)
+5. "Simpan dan kembali ke kursus"
+6. Untuk menilai: kursus -> Latihan Soal Aljabar -> "Lihat semua pengiriman"
+   -> nilai (bisa pakai Rubrik yang sudah dibuat) -> simpan
+
+---------------------------------------------------------------------------
+C. ALUR KERJA MURID
+---------------------------------------------------------------------------
+1. Login -> Dashboard menampilkan kursus miliknya
+2. Klik kursus -> baca materi -> kerjakan tugas (upload file) -> kerjakan kuis
+3. Nilai otomatis masuk, murid bisa lihat di "Nilai" (Grades)
+
+---------------------------------------------------------------------------
+D. STRUKTUR YANG SUDAH DIBUAT
+---------------------------------------------------------------------------
+Kategori kursus (jurusan):
+  - TKJ (Teknik Komputer & Jaringan)       [id: tkj]
+  - RPL (Rekayasa Perangkat Lunak)          [id: rpl]
+  - MM  (Multimedia)                        [id: mm]
+  - TJKT (Teknik Jaringan Komputer & Telkom) [id: tjkt]
+
+Kohort (kelas) contoh: TKJ X-1, TKJ X-2, RPL X-1, MM X-1
+  -> untuk enroll massal murid ke kursus.
+
+Kursus contoh: "Matematika X TKJ" (id 3) berisi:
+  - Materi : Pengantar Aljabar (Page)
+  - Tugas  : Latihan Soal Aljabar + Rubrik penilaian
+  - Kuis   : Kuis Harian Dasar Aljabar (2 soal pilihan ganda)
+  Murid TKJ X-1 otomatis terdaftar (via kohort), pakbudi guru.
+
+---------------------------------------------------------------------------
+E. ADMIN: HAL PENTING
+---------------------------------------------------------------------------
+- Backup otomatis: setiap hari 02:30 -> /root/moodle-backups/ (14 hari)
+- Cron Moodle: berjalan tiap menit (menjalankan task terjadwal)
+- Password policy: minimal 8 karakter
+- Tambah kursus: Dashboard -> Site administration -> Courses -> Add a course
+- Enroll massal: site admin -> Users -> Accounts -> Cohorts -> masukkan user,
+  lalu di kursus aktifkan "Cohort sync".
+- Ganti password siswa lupa: site admin -> Users -> Accounts -> Browse list
+  -> user -> Set new password.
+
+---------------------------------------------------------------------------
+F. CARA MEMBUAT KURSUS BARU (singkat)
+---------------------------------------------------------------------------
+1. Site administration -> Courses -> Add a course
+2. Isi nama (mis. "Matematika X TKJ"), pilih kategori jurusan
+3. Save -> kursus muncul di dashboard
+4. Daftarkan guru: kursus -> Peserta -> Enrol users -> pilih guru
+5. Daftarkan murid: aktifkan method "Cohort sync" pilih kelas kohort
+   -> murid otomatis masuk.
+
+---------------------------------------------------------------------------
+G. CATATAN TEKNIS (untuk admin IT)
+---------------------------------------------------------------------------
+- Stack: Docker Compose di /root/moodle (db, moodle-php, nginx)
+- Akses CLI: docker compose -f /root/moodle/docker-compose.yml exec -T moodle-php php /var/www/html/admin/cli/<script>
+- Script backup: /root/moodle/backup.sh
+- Password DB: moodle / moodle_password_2026 (db: moodle)

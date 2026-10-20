@@ -1,0 +1,10 @@
+# Moodle runtime data
+moodledata/
+
+# k6 load test binaries
+k6-v0.53.0-linux-amd64/
+k6-v0.53.0-linux-amd64.tar.gz
+
+# OS/editor noise
+.DS_Store
+*.swp
